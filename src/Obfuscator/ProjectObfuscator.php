@@ -42,6 +42,7 @@ class ProjectObfuscator
         $this->filesystem = new Filesystem;
         $this->nameGenerator = new IdentifierNameGenerator;
         $this->nameRegistry = new NameMappingRegistry;
+        $this->nameRegistry->setNameGenerator($this->nameGenerator);
     }
 
     public function obfuscate(
@@ -190,7 +191,7 @@ class ProjectObfuscator
                     continue;
                 }
 
-                $collector = new SymbolCollectorVisitor($this->nameRegistry, $config);
+                $collector = new Visitor\SymbolCollectorVisitor($this->nameRegistry, $config);
                 $traverser = new NodeTraverser;
                 $traverser->addVisitor($collector);
                 $traverser->traverse($ast);

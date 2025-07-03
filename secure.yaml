@@ -1,0 +1,40 @@
+project:
+  type: generic
+  name: secure
+  version: 1.0.0
+obfuscation:
+  variables: true
+  functions: true
+  classes: true
+  methods: true
+  properties: true
+  constants: true
+  namespaces: false
+  strings: false
+  control_structures: true
+  shuffle_statements: false
+scope:
+  include_paths:
+    - test_samples/
+  exclude_paths:
+    - vendor/
+    - node_modules/
+    - tests/
+    - storage/
+    - bootstrap/cache/
+  include_extensions:
+    - php
+  preserve_namespaces: {  }
+  preserve_classes: {  }
+  preserve_methods: {  }
+output:
+  directory: dist/
+  preserve_structure: true
+  add_header: true
+  strip_comments: true
+  strip_whitespace: true
+security:
+  scramble_mode: identifier
+  scramble_length: 8
+  add_dummy_code: false
+  randomize_order: false
