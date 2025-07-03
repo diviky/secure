@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Diviky Secure package.
+ *
+ * (c) Sankar <sankar@diviky.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// Check if running from phar or from source
+if (Phar::running()) {
+    require_once 'phar://secure.phar/vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require_once __DIR__ . '/../../../autoload.php';
+} else {
+    fwrite(STDERR, "Unable to find autoloader. Please run 'composer install'.\n");
+    exit(1);
+}
+
+use Diviky\Secure\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+
+$application = new Application();
+$application->run($input); 

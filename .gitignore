@@ -1,0 +1,4 @@
+vendor
+coverage
+.phpunit.cache
+.DS_Store
